@@ -9,7 +9,16 @@ import Canvas from './components/Canvas';
 class App extends Component {
   //Start the uniform interval that will trigger the moveObjects action.
   //The trackMouse refers to a relative position inside your canvas.
+  
   componentDidMount() {
+  //To change the game dimensions and to make it responsive via onresize
+    window.onresize = () => {
+      const cnv = document.getElementById('aliens-go-home-canvas');
+      cnv.style.width = `${window.innerWidth}px`;
+      cnv.style.height = `${window.innerHeight}px`;
+    };
+    window.onresize(); 
+
     const self = this;
     setInterval(() => {
       self.props.moveObjects(self.canvasMousePosition);
