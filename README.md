@@ -2,4 +2,4 @@
 
 A tutorial from Bruno Krebs: Learn how to make React and Redux control a bunch of SVG elements to create a game.
 
-<img src="https://github.com/elivanK/gameAliens/blob/master/public/images/Screen%20Shot%201.png">
+<img src="https://github.com/elivanK/gameAliens/blob/master/public/images/ScreenShot2.png">
