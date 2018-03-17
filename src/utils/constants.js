@@ -19,3 +19,5 @@ export const flyingObjectsStarterPositions = [
 150,
 300,
 ];
+
+export const gameHeight = 1200;

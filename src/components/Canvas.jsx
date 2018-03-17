@@ -36,7 +36,7 @@ const Canvas = (props) => {
       <CurrentScore score={15} />
         { ! props.gameState.started &&
         <g>
-        <StartGame onClick={() => props.StartGame()} />
+        <StartGame onClick={() => props.startGame()} />
         <Title />
         </g>
         }
