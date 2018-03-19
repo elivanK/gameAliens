@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getCanvasPosition } from './utils/formulas';
 import Canvas from './components/Canvas';
+import * as Auth0 from 'auth0-web';
 
+//The config function to config the auth0-web pck with my client properties
+Auth0.configure({
+  domain: 'kook.eu.auth0.com',
+  clientID: 'kvny7jlBZZNIjlmVCBdGJLU25EYeMcm8',
+  redirectUri: 'http://localhost:3000/',
+  responseType: 'token id_token',
+  scope: 'openid profile manage:points',
+});
 class App extends Component {
   //Start the uniform interval that will trigger the moveObjects action.
   //The trackMouse refers to a relative position inside your canvas.
   componentDidMount() {
     const self = this;
+    //The handleauthcb is to evaluate if the player is returning from Auth0
+    //after authentication, it fetch tokens from url and if succeed, fetch the
+    //player profile and persists evething to localstorage
+    Auth0.handleAuthCallback();
+    //subscribe is to log if player is authenticated or not true/ false.
+    Auth0.subscribe((auth) => {
+      console.log(auth);
+    });
+
     setInterval(() => {
       self.props.moveObjects(self.canvasMousePosition);
     }, 10);
