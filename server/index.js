@@ -3,13 +3,14 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
+
 /*
-After choosing JWT library jsonwebtoken
+After choosing JWT Jason web token library jsonwebtoken
 Configure the library that will validate the access tokens in your API. 
 Validating a token means that you are certain you can trust it's contents.
 */
 const client = jwksClient({
-    jwksUri: "kook.eu.auth0.com"
+    jwksUri: "https://kook.eu.auth0.com/.well-known/jwks.json"
 });
 
 const players = [
@@ -26,8 +27,9 @@ const verifyPlayer = (token, cb) => {
     const kid = uncheckedToken.header.kid;
 
     client.getSigningKey(kid, (err, key) => {
-        const signingKey = key.publicKey || key.rsaPublicKey;
-        jwt.verify(token, signingKey, cb);
+    const signingKey = key.publicKey || key.rsaPublicKey;
+
+    jwt.verify(token, signingKey, cb);
     });
 };
 
