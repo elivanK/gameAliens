@@ -24,3 +24,9 @@ export const loggedIn = player => ({
     type: LOGGED_IN,
     player,
 });
+
+export const SHOOT = 'SHOOT';
+export const shoot = (mousePosition) => ({
+    type: SHOOT,
+    mousePosition,
+});

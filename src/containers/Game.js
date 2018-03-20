@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import App from '../App';
-import { leaderboardLoaded, loggedIn, moveObjects, startGame } from '../actions/index';
+import { leaderboardLoaded, loggedIn, moveObjects, startGame, shoot } from '../actions/index';
 
 //Tell redux that App component (The Canvas) 
 //cares about the gameState property.
@@ -28,6 +28,9 @@ const mapDispatchToProps = dispatch => ({
     },
     startGame: () => {
         dispatch(startGame());
+    },
+    shoot: (mousePosition) => {
+        dispatch(shoot(mousePosition))
     },
 });
 
