@@ -20,6 +20,22 @@ function moveObjects(state, action) {
   let flyingObjects = newState.gameState.flyingObjects.filter(object => (
     (now - object.createdAt) < 4000
   ));
+  //Adding the opetion for updating lives and current 
+  //compare the current length of the flyingObjects array with the one from the 
+  //original state to decide if players must loose a life or not.
+  //if the length of these arrays differs, it means one flying object invaded the Earth.
+  const lostLife = state.gameState.flyingObjects.length > flyingObjects.length;
+  let lives = state.gameState.lives;
+  if (lostLife) {
+    lives--;
+  }
+
+  const started = lives > 0;
+  if (!started) {
+    flyingObjects = [];
+    cannonBalls = [];
+    lives = 3;
+  }
 
   const { x, y } = mousePosition;
   const angle = calculateAngle(0, 0, x, y);
@@ -31,12 +47,18 @@ function moveObjects(state, action) {
   cannonBalls = cannonBalls.filter(cannonBall => (cannonBallsDestroyed.indexOf(cannonBall.id)));
   flyingObjects = flyingObjects.filter(flyingDisc => (flyingDiscsDestroyed.indexOf(flyingDisc.id)));
 
+  //Update the current score
+  const kills = state.gameState.kills + flyingDiscsDestroyed.length;
+
   return {
     ...newState,
     gameState: {
         ...newState.gameState,
         flyingObjects,
-        cannonBalls,
+        cannonBalls: [...cannonBalls],
+        lives,
+        started,
+        kills,
     },
     angle,
   };
