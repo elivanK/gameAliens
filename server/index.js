@@ -53,8 +53,8 @@ io.on('connection', (socket) => {
   socket.on('new-max-score', newMaxScoreHandler);
 });
 
-http.listen(3002, () => {
-  console.log('listening on port 3002');
+http.listen(3001, () => {
+  console.log('listening on port 3001');
 });
 
     

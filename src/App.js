@@ -23,7 +23,7 @@ class App extends Component {
   }
   //Start the uniform interval that will trigger the moveObjects action.
   //The trackMouse refers to a relative position inside your canvas.
-  omponentDidMount() {
+  componentDidMount() {
     const self = this;
 
     Auth0.handleAuthCallback();
